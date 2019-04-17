@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["esnext"],
+        "module": "commonjs",
+        "outDir": "dist",
+        "sourceMap": true,
+        // "declaration": true,
+        "noUnusedLocals": true // Enrico
+        // "noUnusedParameters": true   // Enrico
+    },
+    // "files": [
+    //   "./node_modules/@types/mocha/index.d.ts",
+    //   "./node_modules/@types/node/index.d.ts"
+    // ],
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2019", "dom"]
+}
