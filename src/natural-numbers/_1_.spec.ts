@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { _1_ } from './_1_';
 
-describe('One function', () => {
+describe('ONE function', () => {
     beforeEach(() => {});
 
     afterEach(() => {});
@@ -25,5 +25,21 @@ describe('One function', () => {
         const f = x => x + 2;
         const result = _1_(f)(z);
         expect(result).to.equal(5);
+    });
+});
+
+import { ONCE } from './_1_';
+import { I } from '../combinators/identity';
+describe('ONCE function', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    it('ONCE, which is the same function as ONE with no typing, is the Identity function', () => {
+        const z = 11;
+        const f = x => x + 12;
+        const result = ONCE(f)(z);
+        const resultIndentity = I(f)(z);
+        expect(result).to.equal(resultIndentity);
     });
 });

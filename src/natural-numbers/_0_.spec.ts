@@ -21,3 +21,17 @@ describe('Zero function', () => {
         expect(resultWithNull).to.equal(resultWithAnything);
     });
 });
+
+import { ZERO_TIMES } from './_0_';
+import { NOT } from '../bolean-logic/not';
+import { T } from '../bolean-logic/true';
+describe('ZERO_TIMES function', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    it('ZERO_TIMES is boolean False', () => {
+        const notFalse = NOT(ZERO_TIMES);
+        expect(notFalse).to.equal(T);
+    });
+});

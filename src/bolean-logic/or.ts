@@ -1,5 +1,5 @@
 // The OR function
-// lambda: OR := λpq.ppq
+// lambda: OR := λpq. p p q
 // explanation
 // p and q are boolean (see functions T and F), so are binary functions, i.e. they expect 2 parameters
 // so ppq is the application of p to p and q
@@ -13,6 +13,16 @@ export const OR = p => q => p(p)(q);
 OR.toString = () => 'OR function';
 
 import { BOOL } from './boolean';
-
 export const OR_t = (p: BOOL) => (q: BOOL) => p(p)(q) as BOOL;
 OR_t.toString = () => 'OR typed function';
+
+// OR := λpq. p p q
+// we apply the OR function to the 'x' and 'y' arguments, the evaluation of this function (i.e. its beta reduction) is
+// (λpq. p p q)xy -> xxy
+// if we apply the 'self-application' combinator (i.e. the Mockingbird) to argument 'x' we have
+// Mxy -> xxy
+// so the M function is equivalent to OR
+
+import { M } from '../combinators/self-application-mockingbird';
+export const OR_m = p => q => M(p)(q);
+OR_m.toString = () => 'OR function implemented with Mockingbird';

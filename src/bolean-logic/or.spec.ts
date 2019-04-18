@@ -51,3 +51,30 @@ describe('OR_t typed function', () => {
         expect(result).to.equal(T);
     });
 });
+
+import { OR_m } from './or';
+describe('OR_t function implemented with Mockingbird', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    it('true OR true is true', () => {
+        const result = OR_m(T)(T);
+        expect(result).to.equal(T);
+    });
+
+    it('false OR true is true', () => {
+        const result = OR_m(F)(T);
+        expect(result).to.equal(T);
+    });
+
+    it('false OR false is false', () => {
+        const result = OR_m(F)(F);
+        expect(result).to.equal(F);
+    });
+
+    it('true OR false is true', () => {
+        const result = OR_m(T)(F);
+        expect(result).to.equal(T);
+    });
+});
