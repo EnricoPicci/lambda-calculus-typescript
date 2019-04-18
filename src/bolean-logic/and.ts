@@ -10,4 +10,9 @@
 //
 
 export const AND = p => q => p(q)(p);
-AND.toString = () => 'And function';
+AND.toString = () => 'AND function';
+
+import { BOOL } from './boolean';
+
+export const AND_t = (p: BOOL) => (q: BOOL) => p(q)(p) as BOOL;
+AND_t.toString = () => 'AND typed function';

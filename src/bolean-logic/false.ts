@@ -6,6 +6,20 @@
 // lambda:  FALSE := λab.b   this is the KI function
 // FALSE is a function to which you pass 2 parameters and it selects the second
 import { KI } from '../combinators/second-kite';
+import { createBrandedFunction } from '../types-utils/create-branded-function';
 
-export const F = KI;
+const F_ = KI;
+
+const _F = createBrandedFunction(
+    F_,
+    () =>
+        class {
+            private p: any;
+            getP() {
+                return this.p;
+            }
+        },
+);
+
+export const F = _F;
 F.toString = () => 'False function';

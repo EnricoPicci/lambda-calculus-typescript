@@ -7,6 +7,10 @@
 
 import { T } from './true';
 import { F } from './false';
+import { BOOL } from './boolean';
 
 export const NOT = p => p(F)(T);
-NOT.toString = () => 'Not function';
+NOT.toString = () => 'NOT function';
+
+export const NOT_t = (p: BOOL) => p(F)(T) as BOOL;
+NOT_t.toString = () => 'NOT typed function';

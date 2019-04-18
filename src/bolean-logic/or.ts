@@ -10,4 +10,9 @@
 //
 
 export const OR = p => q => p(p)(q);
-OR.toString = () => 'Or function';
+OR.toString = () => 'OR function';
+
+import { BOOL } from './boolean';
+
+export const OR_t = (p: BOOL) => (q: BOOL) => p(p)(q) as BOOL;
+OR_t.toString = () => 'OR typed function';

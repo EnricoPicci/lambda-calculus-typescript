@@ -47,3 +47,48 @@ describe('PREDECESSOR function', () => {
         expect(resultWithPredecessorOfTwo).to.equal(resultWithOne);
     });
 });
+
+import { PREDECESSOR_t } from './predecessor';
+import { SUCCESSOR_t } from './successor';
+describe('PREDECESSOR_t typed function', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    it('Zero is the predecessor of One', () => {
+        const z = 0;
+        const f = x => x + 1;
+        const predecessorOfOne = PREDECESSOR_t(ONE);
+        const resultWithPredecessorOfOne = predecessorOfOne(f)(z);
+        const resultWithZero = ZERO(f)(z);
+        expect(resultWithPredecessorOfOne).to.equal(resultWithZero);
+    });
+
+    it('One is the predecessor of Two', () => {
+        const z = 0;
+        const f = x => x + 1;
+        const predecessorOfTwo = PREDECESSOR_t(TWO);
+        const resultWithPredecessorOfTwo = predecessorOfTwo(f)(z);
+        const resultWithOne = ONE(f)(z);
+        expect(resultWithPredecessorOfTwo).to.equal(resultWithOne);
+    });
+
+    it('The predecessor of the successor of Two is Two', () => {
+        const z = 0;
+        const f = x => x + 1;
+        const successorOfTwo = SUCCESSOR_t(TWO);
+        const predecessorOfSuccessorOfTwo = PREDECESSOR_t(successorOfTwo);
+        const resultWithPredecessorOfSuccessorOfTwo = predecessorOfSuccessorOfTwo(f)(z);
+        const resultWithTwo = TWO(f)(z);
+        expect(resultWithPredecessorOfSuccessorOfTwo).to.equal(resultWithTwo);
+    });
+
+    it('One is the predecessor of Two even with the successor function for even numbers', () => {
+        const z = 0;
+        const f = x => x + 2;
+        const predecessorOfTwo = PREDECESSOR_t(TWO);
+        const resultWithPredecessorOfTwo = predecessorOfTwo(f)(z);
+        const resultWithOne = ONE(f)(z);
+        expect(resultWithPredecessorOfTwo).to.equal(resultWithOne);
+    });
+});
