@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { EXP } from './exp';
-import { PLUS } from './plus';
+import { ADD } from './add';
 import { ZERO } from '../natural-numbers/_0_';
 import { ONE } from '../natural-numbers/_1_';
 import { TWO } from '../natural-numbers/_2_';
@@ -24,7 +24,7 @@ describe('EXP function', () => {
         const f = x => x + 1;
         const twoExpTwo = EXP(TWO)(TWO);
         const result = twoExpTwo(f)(z);
-        const twoPlusTwo = PLUS(TWO)(TWO);
+        const twoPlusTwo = ADD(TWO)(TWO);
         const resultWithTwoPlusTwo = twoPlusTwo(f)(z);
         expect(result).to.equal(resultWithTwoPlusTwo);
     });
@@ -53,14 +53,14 @@ describe('EXP function', () => {
         const f = x => x + 3;
         const twoExpTwo = EXP(TWO)(TWO);
         const result = twoExpTwo(f)(z);
-        const twoPlusTwo = PLUS(TWO)(TWO);
+        const twoPlusTwo = ADD(TWO)(TWO);
         const resultWithTwoPlusTwo = twoPlusTwo(f)(z);
         expect(result).to.equal(resultWithTwoPlusTwo);
     });
 });
 
 import { EXP_t } from './exp';
-import { PLUS_t } from './plus';
+import { ADD_t } from './add';
 describe('EXP_t typed function', () => {
     beforeEach(() => {});
 
@@ -80,7 +80,7 @@ describe('EXP_t typed function', () => {
         const f = x => x + 1;
         const twoExpTwo = EXP_t(TWO)(TWO);
         const result = twoExpTwo(f)(z);
-        const twoPlusTwo = PLUS_t(TWO)(TWO);
+        const twoPlusTwo = ADD_t(TWO)(TWO);
         const resultWithTwoPlusTwo = twoPlusTwo(f)(z);
         expect(result).to.equal(resultWithTwoPlusTwo);
     });
@@ -109,7 +109,7 @@ describe('EXP_t typed function', () => {
         const f = x => x + 3;
         const twoExpTwo = EXP_t(TWO)(TWO);
         const result = twoExpTwo(f)(z);
-        const twoPlusTwo = PLUS_t(TWO)(TWO);
+        const twoPlusTwo = ADD_t(TWO)(TWO);
         const resultWithTwoPlusTwo = twoPlusTwo(f)(z);
         expect(result).to.equal(resultWithTwoPlusTwo);
     });

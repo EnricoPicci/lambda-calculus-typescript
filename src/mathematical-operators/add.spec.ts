@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import { PLUS } from './plus';
+import { ADD } from './add';
 import { SUCCESSOR } from './successor';
 import { ZERO } from '../natural-numbers/_0_';
 import { ONE } from '../natural-numbers/_1_';
 import { TWO } from '../natural-numbers/_2_';
 
-describe('PLUS function', () => {
+describe('ADD function', () => {
     beforeEach(() => {});
 
     afterEach(() => {});
@@ -13,7 +13,7 @@ describe('PLUS function', () => {
     it('Zero plus Zero is Zero', () => {
         const z = 0;
         const f = x => x + 1;
-        const zeroPlusZero = PLUS(ZERO)(ZERO);
+        const zeroPlusZero = ADD(ZERO)(ZERO);
         const result = zeroPlusZero(f)(z);
         const resultWithZero = ZERO(f)(z);
         expect(result).to.equal(resultWithZero);
@@ -22,7 +22,7 @@ describe('PLUS function', () => {
     it('One plus Zero is One', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = PLUS(ONE)(ZERO);
+        const onePlusZero = ADD(ONE)(ZERO);
         const result = onePlusZero(f)(z);
         const resultWithOne = ONE(f)(z);
         expect(result).to.equal(resultWithOne);
@@ -31,7 +31,7 @@ describe('PLUS function', () => {
     it('Zero plus One is One', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = PLUS(ZERO)(ONE);
+        const onePlusZero = ADD(ZERO)(ONE);
         const result = onePlusZero(f)(z);
         const resultWithOne = ONE(f)(z);
         expect(result).to.equal(resultWithOne);
@@ -40,7 +40,7 @@ describe('PLUS function', () => {
     it('One plus Two is the successo of Two', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = PLUS(ONE)(TWO);
+        const onePlusZero = ADD(ONE)(TWO);
         const result = onePlusZero(f)(z);
         const successorOfTwo = SUCCESSOR(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
@@ -51,7 +51,7 @@ describe('PLUS function', () => {
         and with the origin (zero) set to 5`, () => {
         const z = 5;
         const f = x => x + 2;
-        const onePlusZero = PLUS(ONE)(TWO);
+        const onePlusZero = ADD(ONE)(TWO);
         const result = onePlusZero(f)(z);
         const successorOfTwo = SUCCESSOR(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
@@ -59,9 +59,9 @@ describe('PLUS function', () => {
     });
 });
 
-import { PLUS_t } from './plus';
+import { ADD_t } from './add';
 import { SUCCESSOR_t } from './successor';
-describe('PLUS_t typed function', () => {
+describe('ADD_t typed function', () => {
     beforeEach(() => {});
 
     afterEach(() => {});
@@ -69,7 +69,7 @@ describe('PLUS_t typed function', () => {
     it('Zero plus Zero is Zero', () => {
         const z = 0;
         const f = x => x + 1;
-        const zeroPlusZero = PLUS_t(ZERO)(ZERO);
+        const zeroPlusZero = ADD_t(ZERO)(ZERO);
         const result = zeroPlusZero(f)(z);
         const resultWithZero = ZERO(f)(z);
         expect(result).to.equal(resultWithZero);
@@ -78,7 +78,7 @@ describe('PLUS_t typed function', () => {
     it('One plus Zero is One', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = PLUS_t(ONE)(ZERO);
+        const onePlusZero = ADD_t(ONE)(ZERO);
         const result = onePlusZero(f)(z);
         const resultWithOne = ONE(f)(z);
         expect(result).to.equal(resultWithOne);
@@ -87,7 +87,7 @@ describe('PLUS_t typed function', () => {
     it('Zero plus One is One', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = PLUS_t(ZERO)(ONE);
+        const onePlusZero = ADD_t(ZERO)(ONE);
         const result = onePlusZero(f)(z);
         const resultWithOne = ONE(f)(z);
         expect(result).to.equal(resultWithOne);
@@ -96,7 +96,7 @@ describe('PLUS_t typed function', () => {
     it('One plus Two is the successo of Two', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = PLUS_t(ONE)(TWO);
+        const onePlusZero = ADD_t(ONE)(TWO);
         const result = onePlusZero(f)(z);
         const successorOfTwo = SUCCESSOR_t(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
@@ -107,7 +107,7 @@ describe('PLUS_t typed function', () => {
         and with the origin (zero) set to 5`, () => {
         const z = 5;
         const f = x => x + 2;
-        const onePlusZero = PLUS_t(ONE)(TWO);
+        const onePlusZero = ADD_t(ONE)(TWO);
         const result = onePlusZero(f)(z);
         const successorOfTwo = SUCCESSOR_t(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
