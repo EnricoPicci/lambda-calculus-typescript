@@ -7,7 +7,7 @@ import { SUCCESSOR } from '../mathematical-operators/successor';
 import { T } from '../bolean-logic/true';
 import { F } from '../bolean-logic/false';
 
-describe('IsZero function', () => {
+describe('ISZERO function', () => {
     beforeEach(() => {});
 
     afterEach(() => {});

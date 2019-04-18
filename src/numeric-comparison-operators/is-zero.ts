@@ -20,3 +20,4 @@
 import { T } from '../bolean-logic/true';
 import { F } from '../bolean-logic/false';
 export const ISZERO = n => n(x => F)(T);
+ISZERO.toString = () => 'ISZERO function';
