@@ -37,22 +37,22 @@ describe('ADD function', () => {
         expect(result).to.equal(resultWithOne);
     });
 
-    it('One plus Two is the successo of Two', () => {
+    it('One plus Two is the successor of Two', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = ADD(ONE)(TWO);
-        const result = onePlusZero(f)(z);
+        const onePlusTwo = ADD(ONE)(TWO);
+        const result = onePlusTwo(f)(z);
         const successorOfTwo = SUCCESSOR(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
         expect(result).to.equal(resultWithSuccessorOfTwo);
     });
 
-    it(`One plus Two is the successo of Two even with the successor function for even numbers
+    it(`One plus Two is the successor of Two even with the successor function for even numbers
         and with the origin (zero) set to 5`, () => {
         const z = 5;
         const f = x => x + 2;
-        const onePlusZero = ADD(ONE)(TWO);
-        const result = onePlusZero(f)(z);
+        const onePlusTwo = ADD(ONE)(TWO);
+        const result = onePlusTwo(f)(z);
         const successorOfTwo = SUCCESSOR(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
         expect(result).to.equal(resultWithSuccessorOfTwo);
@@ -93,22 +93,22 @@ describe('ADD_t typed function', () => {
         expect(result).to.equal(resultWithOne);
     });
 
-    it('One plus Two is the successo of Two', () => {
+    it('One plus Two is the successor of Two', () => {
         const z = 0;
         const f = x => x + 1;
-        const onePlusZero = ADD_t(ONE)(TWO);
-        const result = onePlusZero(f)(z);
+        const onePlusTwo = ADD_t(ONE)(TWO);
+        const result = onePlusTwo(f)(z);
         const successorOfTwo = SUCCESSOR_t(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
         expect(result).to.equal(resultWithSuccessorOfTwo);
     });
 
-    it(`One plus Two is the successo of Two even with the successor function for even numbers
+    it(`One plus Two is the successor of Two even with the successor function for even numbers
         and with the origin (zero) set to 5`, () => {
         const z = 5;
         const f = x => x + 2;
-        const onePlusZero = ADD_t(ONE)(TWO);
-        const result = onePlusZero(f)(z);
+        const onePlusTwo = ADD_t(ONE)(TWO);
+        const result = onePlusTwo(f)(z);
         const successorOfTwo = SUCCESSOR_t(TWO);
         const resultWithSuccessorOfTwo = successorOfTwo(f)(z);
         expect(result).to.equal(resultWithSuccessorOfTwo);
