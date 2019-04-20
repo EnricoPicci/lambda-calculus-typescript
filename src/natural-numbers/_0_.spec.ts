@@ -12,14 +12,6 @@ describe('Zero function', () => {
         const result = ZERO(f)(x);
         expect(result).to.equal(x);
     });
-
-    it('Zero', () => {
-        const something = Symbol('something');
-        const anything = Symbol('anything');
-        const resultWithNull = ZERO(null)(something);
-        const resultWithAnything = ZERO(anything)(something);
-        expect(resultWithNull).to.equal(resultWithAnything);
-    });
 });
 
 import { ZERO_TIMES } from './_0_';
