@@ -22,3 +22,4 @@ const _T = createBrandedFunction(
 
 export const T = _T;
 T.toString = () => 'True function';
+export const TRUE = T;

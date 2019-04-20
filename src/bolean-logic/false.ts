@@ -23,3 +23,4 @@ const _F = createBrandedFunction(
 
 export const F = _F;
 F.toString = () => 'False function';
+export const FALSE = F;
