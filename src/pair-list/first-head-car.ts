@@ -6,7 +6,7 @@ import { T } from '../bolean-logic/true';
 export const FIRST = p => p(T);
 FIRST.toString = () => 'FIRST function';
 
-export function FIRST_t<TT>(p: PAIR_TYPE<TT>) {
+export function FIRST_t<TT>(p: PAIR_TYPE<TT>): TT {
     return p(T);
 }
 FIRST_t.toString = () => 'FIRST typed function';

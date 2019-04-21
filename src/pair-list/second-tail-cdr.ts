@@ -6,7 +6,7 @@ export const SECOND = p => p(F);
 SECOND.toString = () => 'SECOND function';
 
 import { PAIR_TYPE } from './pair-vario';
-export function SECOND_t<TT>(p: PAIR_TYPE<TT>) {
+export function SECOND_t<TT>(p: PAIR_TYPE<TT>): TT {
     return p(F);
 }
 // export function SECOND_t(p: PAIR_TYPE) {return p(F)};
