@@ -33,6 +33,12 @@ describe('EQUAL function', () => {
         expect(result).to.equal(F);
     });
 
+    it('the successor of ONE is equal to TWO', () => {
+        const two = SUCCESSOR(ONE);
+        const result = EQUAL(two)(TWO);
+        expect(result).to.equal(T);
+    });
+
     it('ONE is not equal to TWO', () => {
         const result = EQUAL(ONE)(TWO);
         expect(result).to.equal(F);
@@ -65,6 +71,12 @@ describe('LEQ typed function', () => {
         const THREE = SUCCESSOR_t(TWO);
         const result = EQUAL_t(THREE)(TWO);
         expect(result).to.equal(F);
+    });
+
+    it('the successor of ONE is equal to TWO', () => {
+        const two = SUCCESSOR_t(ONE);
+        const result = EQUAL_t(two)(TWO);
+        expect(result).to.equal(T);
     });
 
     it('ONE is not equal to TWO', () => {

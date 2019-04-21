@@ -15,3 +15,18 @@ describe('PAIR function', () => {
         expect(pairOfNotComposed(T)).to.equal(T);
     });
 });
+
+import { PAIR_t } from './pair-vario';
+import { F } from '../bolean-logic/false';
+import { BOOL } from '../bolean-logic/boolean';
+import { FIRST_t } from './first-head-car';
+describe('PAIR typed function', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    it('The first of a PAIR of T  and F is T', () => {
+        const pairOfTandF = PAIR_t<BOOL>(T)(F);
+        expect(FIRST_t(pairOfTandF)).to.equal(T);
+    });
+});
