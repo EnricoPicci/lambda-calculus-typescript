@@ -13,7 +13,7 @@ import { B } from '../combinators/function-composition-bluebird';
 export const MULT = B;
 MULT.toString = () => 'MULT function';
 
-import { λ } from '../lambda';
+import { uF } from '../lambda';
 import { NUMBER } from '../natural-numbers/number';
-export const MULT_t = (n: NUMBER) => (m: NUMBER) => ((f: λ) => n(m(f))) as NUMBER;
+export const MULT_t = (n: NUMBER) => (m: NUMBER) => ((f: uF) => n(m(f))) as NUMBER;
 MULT_t.toString = () => 'MULT typed function';

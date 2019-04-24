@@ -4,7 +4,7 @@ import { ZERO } from '../src/natural-numbers/_0_';
 import { TRUE } from '../src/bolean-logic/true';
 import { FALSE } from '../src/bolean-logic/false';
 import { SUCC } from '../src/mathematical-operators/successor';
-import { λ } from '../src/lambda';
+import { uF } from '../src/lambda';
 import { BOOL } from '../src/bolean-logic/boolean';
 import { AND } from '../src/bolean-logic/and';
 
@@ -19,7 +19,7 @@ describe('How to compare numbers expressed as Church numerals', () => {
     //
     // Now the point is how to define LEQ.
     // To define LEQ we start assuming that we have a function SUB(m)(n)
-    // which returns (m - n) is m is greaterOrEqual to n and ZERO in all other cases.
+    // which returns (m - n) if m is greaterOrEqual to n and ZERO in all other cases.
     // We also assume we have a function ISZERO(n) that returns TRUE if n is ZERO, FALSE otherwise.
     // IF we have such functions, we can define LEQ as
     // LEQ = λmn. ISZERO (SUB m n)
@@ -71,9 +71,9 @@ describe('How to compare numbers expressed as Church numerals', () => {
     //
     // Now, with a leap of faith, let's accept the following definition of PRED
     // λnfx. n (λgh. h (g f)) (λu. x) (λu. u)
-    const PRED = (n: NUMBER) => ((f: λ) => x => n((g: λ) => (h: λ) => h(g(f)))(u => x)(u => u)) as NUMBER;
+    const PRED = (n: NUMBER) => ((f: uF) => x => n((g: uF) => (h: uF) => h(g(f)))(u => x)(u => u)) as NUMBER;
     it('ZERO is the PRED of ONE', () => {
-        const f: λ = x => x + 1;
+        const f: uF = x => x + 1;
         const a = 0;
         const predOne = PRED(ZERO);
         const applyPredOneToArgs = predOne(f)(a);
@@ -85,7 +85,7 @@ describe('How to compare numbers expressed as Church numerals', () => {
     // SUB = λmn. n PRED m
     const SUB = (m: NUMBER) => (n: NUMBER) => n(PRED)(m) as NUMBER;
     it('ONE minus ONE is ZERO', () => {
-        const f: λ = x => x + 1;
+        const f: uF = x => x + 1;
         const a = 0;
         const oneMinusOne = SUB(ONE)(ONE);
         const applyOneMinusOneToArgs = oneMinusOne(f)(a);
@@ -93,7 +93,7 @@ describe('How to compare numbers expressed as Church numerals', () => {
         expect(applyOneMinusOneToArgs).to.equal(applyZeroToArgs);
     });
     it('ONE minus ZERO is ONE', () => {
-        const f: λ = x => x + 1;
+        const f: uF = x => x + 1;
         const a = 0;
         const oneMinusOne = SUB(ONE)(ZERO);
         const applyOneMinusZeroToArgs = oneMinusOne(f)(a);

@@ -4,9 +4,9 @@
         "lib": ["esnext"],
         "module": "commonjs",
         "outDir": "dist",
-        "sourceMap": true,
+        "sourceMap": true
         // "declaration": true,
-        "noUnusedLocals": true // Enrico
+        // "noUnusedLocals": true // Enrico
         // "noUnusedParameters": true   // Enrico
     },
     // "files": [

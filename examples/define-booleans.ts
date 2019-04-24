@@ -17,7 +17,7 @@ describe('How to define booleans with Lambda - Church booleans', () => {
     // The AND function has to be binary and has to accept 2 parameters then
     // AND = λpq.
     // where p and q are booleans
-    // Note that λpq is just a shorthand for λp.
+    // Note that λpq. is just a shorthand for λp.λq.
     //
     // So, the starting point is that AND has to have 2 boolean arguments, p and q
     // Such arguments are boolean, and therefore are binary functions, given our previous definition
@@ -37,6 +37,44 @@ describe('How to define booleans with Lambda - Church booleans', () => {
     // AND = λpq.pqp
     const AND = p => q => p(q)(p);
     // We can easily check that AND behaves as expected
+    it('TRUE AND TRUE is TRUE', () => {
+        expect(AND(T)(T)).to.equal(T);
+    });
+    it('TRUE AND FALSE is FALSE', () => {
+        expect(AND(T)(F)).to.equal(F);
+    });
+    it('FALSE AND TRUE is FALSE', () => {
+        expect(AND(F)(F)).to.equal(F);
+    });
+    it('FALSE AND FALSE is FALSE', () => {
+        expect(AND(F)(F)).to.equal(F);
+    });
+
+    // Also the simmetric version of the function works
+    const AND_s = p => q => q(p)(q);
+    // We can easily check that AND behaves as expected
+    it('TRUE AND TRUE is TRUE', () => {
+        expect(AND_s(T)(T)).to.equal(T);
+    });
+    it('TRUE AND FALSE is FALSE', () => {
+        expect(AND_s(T)(F)).to.equal(F);
+    });
+    it('FALSE AND TRUE is FALSE', () => {
+        expect(AND_s(F)(F)).to.equal(F);
+    });
+    it('FALSE AND FALSE is FALSE', () => {
+        expect(AND_s(F)(F)).to.equal(F);
+    });
+});
+
+describe('How to add types to Church booleans', () => {
+    type BOOL = (x: any) => (y: any) => any;
+    const T: BOOL = a => b => a;
+    const F: BOOL = a => b => b;
+
+    type BOOL_OPERATOR = (x: BOOL) => (y: BOOL) => BOOL;
+    const AND: BOOL_OPERATOR = p => q => p(q)(p);
+
     it('TRUE AND TRUE is TRUE', () => {
         expect(AND(T)(T)).to.equal(T);
     });

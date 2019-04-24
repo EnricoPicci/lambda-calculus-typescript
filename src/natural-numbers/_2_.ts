@@ -1,8 +1,8 @@
 // λfx. f (f x)
-import { λ } from '../lambda';
+import { uF } from '../lambda';
 import { NUMBER } from './number';
 
-export const _2_: NUMBER = (f: λ) => x => f(f(x));
+export const _2_: NUMBER = (f: uF) => x => f(f(x));
 export const TWO = _2_;
 _2_.toString = () => '2 function';
 TWO.toString = () => '2 function';

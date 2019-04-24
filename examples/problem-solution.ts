@@ -3,9 +3,9 @@ import { NUMBER } from '../src/natural-numbers/number';
 import { ZERO } from '../src/natural-numbers/_0_';
 import { ONE } from '../src/natural-numbers/_1_';
 import { SUCC } from '../src/mathematical-operators/successor';
-import { λ } from '../src/lambda';
+import { uF } from '../src/lambda';
 import { EQ } from '../src/numeric-comparison-operators/equal';
-import { ADD } from '../src/mathematical-operators/add';
+import { SUM } from '../src/mathematical-operators/add';
 import { SUB } from '../src/mathematical-operators/subtract';
 
 describe('Build the solution to the problem', () => {
@@ -21,18 +21,28 @@ describe('Build the solution to the problem', () => {
     // So, if m equals n, than
     // (EQ(m)(n)) (ADD(m)(n)) (SUB(m)(n))
     // returns The opposite happens if m is not equal to n
-    const PROBLEM_SOLUTION = (m: NUMBER) => (n: NUMBER) => EQ(m)(n)(ADD(m)(n))(SUB(m)(n)) as NUMBER;
-    it('m and n are ONE, i.e. they are equal and therefore they get summed', () => {
-        const f: λ = x => x + 1;
+    const PROBLEM_SOLUTION: NUMBER = (m: NUMBER) => (n: NUMBER) =>
+        // returns TRUE if n and m are equal, FALSE otherwise
+        EQ(m)(n)(
+            // argument picked if EQ returns TRUE
+            SUM(m)(n),
+        )(
+            // argument picked if EQ returns FALSE;
+            SUB(m)(n),
+        );
+
+    it('1.1 m and n are ONE, i.e. they are equal and therefore they get summed', () => {
+        const f: uF = x => x + 1;
         const a = 0;
         const probSol = PROBLEM_SOLUTION(ONE)(ONE);
         const applyProbSolToArgs = probSol(f)(a);
         const TWO = SUCC(ONE);
         const applyTWOToArgs = TWO(f)(a);
         expect(applyProbSolToArgs).to.equal(applyTWOToArgs);
+        expect(applyProbSolToArgs).to.equal(2);
     });
-    it('m is TWO and n is ONE, i.e. they are not equal and therefore we subtract n from m and the result is ONE', () => {
-        const f: λ = x => x + 1;
+    it('1.2 m is TWO and n is ONE, i.e. they are not equal and therefore we subtract n from m and the result is ONE', () => {
+        const f: uF = x => x + 1;
         const a = 0;
         const TWO = SUCC(ONE);
         const probSol = PROBLEM_SOLUTION(TWO)(ONE);
@@ -40,9 +50,9 @@ describe('Build the solution to the problem', () => {
         const applyONEToArgs = ONE(f)(a);
         expect(applyProbSolToArgs).to.equal(applyONEToArgs);
     });
-    it(`m is ONE and n is TWO, i.e. they are not equal and therefore we subtract n from m and the result is ZERO
+    it(`1.3 m is ONE and n is TWO, i.e. they are not equal and therefore we subtract n from m and the result is ZERO
         since SUB returns ZERO if n is greater than m`, () => {
-        const f: λ = x => x + 1;
+        const f: uF = x => x + 1;
         const a = 0;
         const TWO = SUCC(ONE);
         const probSol = PROBLEM_SOLUTION(ONE)(TWO);
@@ -75,8 +85,8 @@ describe('Expand the solution to show only anonymous lambdas', () => {
             (m => n => n(n => f => x => n(g => h => h(g(f)))(u => x)(u => u))(m))(m)(n),
         );
 
-    it('m and n are ONE, i.e. they are equal and therefore they get summed', () => {
-        const f: λ = x => x + 1;
+    it('2.1 m and n are ONE, i.e. they are equal and therefore they get summed', () => {
+        const f: uF = x => x + 1;
         const a = 0;
         const probSol = SOL(ONE)(ONE);
         const applyProbSolToArgs = probSol(f)(a);
@@ -84,8 +94,8 @@ describe('Expand the solution to show only anonymous lambdas', () => {
         const applyTWOToArgs = TWO(f)(a);
         expect(applyProbSolToArgs).to.equal(applyTWOToArgs);
     });
-    it('m is TWO and n is ONE, i.e. they are not equal and therefore we subtract n from m and the result is ONE', () => {
-        const f: λ = x => x + 1;
+    it('2.2 m is TWO and n is ONE, i.e. they are not equal and therefore we subtract n from m and the result is ONE', () => {
+        const f: uF = x => x + 1;
         const a = 0;
         const TWO = SUCC(ONE);
         const probSol = SOL(TWO)(ONE);
@@ -93,9 +103,9 @@ describe('Expand the solution to show only anonymous lambdas', () => {
         const applyONEToArgs = ONE(f)(a);
         expect(applyProbSolToArgs).to.equal(applyONEToArgs);
     });
-    it(`m is ONE and n is TWO, i.e. they are not equal and therefore we subtract n from m and the result is ZERO
+    it(`2.3 m is ONE and n is TWO, i.e. they are not equal and therefore we subtract n from m and the result is ZERO
         since SUB returns ZERO if n is greater than m`, () => {
-        const f: λ = x => x + 1;
+        const f: uF = x => x + 1;
         const a = 0;
         const TWO = SUCC(ONE);
         const probSol = SOL(ONE)(TWO);

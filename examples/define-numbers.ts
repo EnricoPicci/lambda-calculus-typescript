@@ -1,24 +1,26 @@
 import { expect } from 'chai';
 
 describe('How to define numbers with Lambda - Church numerals', () => {
-    // define the type lambda as a function that receives an argument and returns something
-    type λ = (x: any) => any;
+    // define the type lambda as a function that receives a λ as argument and returns another λ
+    type λ = (x: λ) => λ;
+    // define uF as the unary function type, i.e. the type of a function which receives an argument and returns something
+    type uF = (x: any) => any;
+
+    type NUMBER = (f: uF) => (x: any) => any;
 
     // ZERO = λfx. x
-    const ZERO = (f: λ) => (x: any) => x;
+    const ZERO: NUMBER = (f: uF) => (x: any) => x;
 
     // ONE = λfx. f x
-    const ONE = (f: λ) => (x: any) => f(x);
+    const ONE: NUMBER = (f: uF) => (x: any) => f(x);
 
     // TWO = λfx. f( f x)
-    const TWO = (f: λ) => (x: any) => f(f(x));
-
-    type NUMBER = (f: λ) => (x: any) => any;
+    const TWO: NUMBER = (f: uF) => (x: any) => f(f(x));
 
     // let's see what is
     // WHAT = λnfx. f( n f x)
-    const WHAT = (n: NUMBER) => (f: λ) => (x: any) => f(n(f)(x));
-    // we can see that if we pass a NUMBER to WHAT it returns something of type NUMBER
+    const WHAT = (n: NUMBER) => (f: uF) => (x: any) => f(n(f)(x));
+    // we can see that if we pass a NUMBER to WHAT it returns something of type compatible with NUMBER
 
     // What happens if we apply WHAT to ZERO
     // (λnfx. f( n x))(ZERO) ->
@@ -30,7 +32,7 @@ describe('How to define numbers with Lambda - Church numerals', () => {
     // as per our definition
     // If we try to apply WHAT to ONE we will get TWO
     // So WHAT is actually the SUCCESSOR (or SUCC) function
-    const SUCC = WHAT;
+    const SUCC = (n: NUMBER): NUMBER => (f: uF) => (x: any) => f(n(f)(x));
     const one = SUCC(ZERO);
     const two = SUCC(ONE);
 
@@ -43,16 +45,16 @@ describe('How to define numbers with Lambda - Church numerals', () => {
     // Let's try the equality passing to TWO and two the same arguments, i.e. a function and an argument (remember that
     // TWO and two are 2 lambda functions of type NUMBER and therefore they expect to receive a function f of type
     // λ and an argument x to be applied to the function f)
-    const f: λ = x => x + 1;
+    const f: uF = x => x + 1;
     const a = 0;
     const resultWithTWO = TWO(f)(a);
     const resultWithTwo = two(f)(a);
-    it('TWO and two are extensioally equal', () => {
+    it('TWO and two are extensionally equal', () => {
         expect(resultWithTWO).to.equal(resultWithTwo);
     });
     const resultWithOne = one(f)(0);
     // the result obtained applying the same function f and argument 0 to 'one' is different
-    it('one and two are not extensioally equal', () => {
+    it('one and two are not extensionally equal', () => {
         expect(resultWithOne).to.not.equal(resultWithTwo);
     });
 

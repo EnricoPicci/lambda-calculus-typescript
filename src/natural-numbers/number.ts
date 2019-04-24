@@ -1,3 +1,3 @@
-import { λ } from '../lambda';
+import { uF } from '../lambda';
 
-export type NUMBER = (f: λ) => (x: any) => any;
+export type NUMBER = (f: uF) => (x: any) => any;

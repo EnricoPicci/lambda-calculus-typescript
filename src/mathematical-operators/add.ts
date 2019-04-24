@@ -10,3 +10,4 @@ import { NUMBER } from '../natural-numbers/number';
 import { SUCCESSOR_t } from './successor';
 export const ADD_t = (m: NUMBER) => (n: NUMBER) => m(SUCCESSOR_t)(n) as NUMBER;
 ADD_t.toString = () => 'ADD typed function';
+export const SUM = ADD_t;

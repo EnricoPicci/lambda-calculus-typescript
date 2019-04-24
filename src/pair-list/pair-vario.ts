@@ -5,15 +5,15 @@
 // when you need to use these arguments, just pass to the box the function you want to apply to such arguments
 //
 
-import { λ } from '../lambda';
+import { uF } from '../lambda';
 
-export const PAIR = x => y => (f: λ) => f(x)(y);
+export const PAIR = x => y => (f: uF) => f(x)(y);
 PAIR.toString = () => 'PAIR function';
 
 // we need to use named function and not fat arrow anonymous function to pass the type
 export function PAIR_t<T>(x: T) {
     return function(y: T): PAIR_TYPE<T> {
-        return (f: λ) => f(x)(y);
+        return (f: uF) => f(x)(y);
     };
 }
 // export type PAIR_TYPE = (f: λ) => any;
