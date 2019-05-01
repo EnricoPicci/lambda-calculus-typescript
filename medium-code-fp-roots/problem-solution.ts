@@ -39,6 +39,7 @@ describe('Build the solution to the problem', () => {
         const TWO = SUCC(ONE);
         const applyTWOToArgs = TWO(f)(a);
         expect(applyProbSolToArgs).to.equal(applyTWOToArgs);
+        // since in the case m and n are both ONE, then the result in JS terms is 2
         expect(applyProbSolToArgs).to.equal(2);
     });
     it('1.2 m is TWO and n is ONE, i.e. they are not equal and therefore we subtract n from m and the result is ONE', () => {
