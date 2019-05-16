@@ -60,3 +60,23 @@ describe('Z fixed-point combinator', () => {
         expect(factorial(ff)(z)).to.equal(120);
     });
 });
+
+describe('tests to explain Z fixed-point combinator', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    // http://pages.cs.wisc.edu/~horwitz/CS704-NOTES/2.LAMBDA-CALCULUS-PART2.html#rec
+
+    it('Factorial using javascript recursive function definition', () => {
+        const fact = x => (x === 0 ? 1 : x * fact(x - 1));
+        // const fact = x => {
+        //     if (x === 0) {
+        //         return 1;
+        //     }
+        //     return x * fact(x - 1);
+        // };
+        expect(fact(0)).to.equal(1);
+        expect(fact(5)).to.equal(120);
+    });
+});

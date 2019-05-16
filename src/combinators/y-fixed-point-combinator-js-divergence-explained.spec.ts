@@ -1,6 +1,6 @@
 // This example tries to explain why the Y combinator is Javascript / Typescript diverges
 // The reason is linked to the fact that Typescript / Javascript does not apply a lazy evaluation strategy
-// rather it applies an eager/string one
+// rather it applies an eager/strict one
 // see https://youtu.be/3VQ382QG-y4?t=3698 at time 1:01:38
 
 // We use the Factorial calculation as example
@@ -8,16 +8,19 @@
 // The Y combinator definition
 // λg. (λx. g (x x)) (λx. g (x x))
 
+// Here is the Typescript implementation of Y using anonymous functions
+// const Y = g => (x => g(x(x)))(x => g(x(x)));
+//
 // This is the Y combinator expressed in terms of Typescript functions and not anonymous 'fat arrow' functions
 // With this version it is easier to follow the flow of execution
 function Y(g) {
-    function innerYfuntion(x) {
-        console.log('first ling of execution of innerYfuntion - executed only once');
+    function innerYfuntion1(x) {
+        console.log('first line of execution of innerYfuntion - executed only once');
         const xx = x(x);
         console.log('I think you never see this line printed since I am never executed');
         return g(xx);
     }
-    function fx(x) {
+    function innerYfuntion2(x) {
         // The following line is the key of the divergence - the value of variable 'x' is 'fx', i.e. the function
         // itself we are in now - so 'x(x)' is 'fx(fx)' which calls 'fx' with 'fx' as argument 'x' which
         // leads to evaluating again 'x(x)' and so on and so for
@@ -28,7 +31,7 @@ function Y(g) {
         console.log('I think you never see this line printed since I am never executed');
         return g(xxx);
     }
-    return innerYfuntion(fx);
+    return innerYfuntion1(innerYfuntion2);
 }
 Y.toString = () => 'Y fixed-point combinator';
 
