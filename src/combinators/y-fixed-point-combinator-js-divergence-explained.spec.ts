@@ -13,6 +13,27 @@
 //
 // This is the Y combinator expressed in terms of Typescript functions and not anonymous 'fat arrow' functions
 // With this version it is easier to follow the flow of execution
+
+// Y(g) body declares 2 functions, innerYfuntion1 and innerYfuntion2 and then returns the result of the execution of
+// innerYfuntion1(innerYfuntion2)
+//
+// Let's consider when a parameter is passed to Y(g), i.e. - as we said, this is the line of code that gets executed
+// innerYfuntion1(innerYfuntion2)
+// innerYfuntion2 represents the input variable x of innerYfuntion1
+// the fist thing that innerYfuntion1 does is to execute
+// const xx = x(x);
+// which means to call innerYfuntion2 passing itself as parameter, in other words
+// x(x) is actually
+// innerYfuntion2(innerYfuntion2)
+// now we enter in the execution logic of innerYfuntion2
+// the first thing that gets executed in innerYfuntion2 is
+// const xxx = x(x);
+// which means that we have to execute x(x) where x is innerYfuntion2
+// so we have again to execute
+// innerYfuntion2(innerYfuntion2)
+// which, as we already saw, leads again to the need to evaluate
+// innerYfuntion2(innerYfuntion2)
+// and so we enter the infinite loop that brings to the exaustion of the stack
 function Y(g) {
     function innerYfuntion1(x) {
         console.log('first line of execution of innerYfuntion - executed only once');
@@ -21,10 +42,7 @@ function Y(g) {
         return g(xx);
     }
     function innerYfuntion2(x) {
-        // The following line is the key of the divergence - the value of variable 'x' is 'fx', i.e. the function
-        // itself we are in now - so 'x(x)' is 'fx(fx)' which calls 'fx' with 'fx' as argument 'x' which
-        // leads to evaluating again 'x(x)' and so on and so for
-
+        // The following line is the key of the divergence as explained above
         // console.log('If you uncomment me you will see me printed many times until Maximum call stack size is exceeded');
         const xxx = x(x);
 
@@ -69,14 +87,13 @@ describe('Y fixed-point combinator', () => {
         };
         F['lambda name'] = 'I am F';
 
-        let errorEncoutered = false;
+        let error;
         try {
             Y(F)(five);
         } catch (e) {
-            expect(e).to.be.not.undefined;
-            errorEncoutered = true;
+            error = e;
         } finally {
-            expect(errorEncoutered).to.be.true;
+            expect(error.message).to.be.equal('Maximum call stack size exceeded');
         }
     });
 });

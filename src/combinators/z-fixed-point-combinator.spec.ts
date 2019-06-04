@@ -7,15 +7,14 @@ import { EQ } from '../numeric-comparison-operators/equal';
 import { PRED } from '../mathematical-operators/predecessor';
 import { MULT } from '../mathematical-operators/multiplication';
 
-describe('Z fixed-point combinator', () => {
+describe('1 - Z fixed-point combinator', () => {
     beforeEach(() => {});
 
     afterEach(() => {});
 
-    it('Z used to calculate Factorial', () => {
-        const z = 0;
-        const ff = x => x + 1;
+    it('1.1 - Z used to calculate Factorial using pure lambda calculus', () => {
         const five = SUCC(SUCC(SUCC(SUCC(SUCC(ZERO)))));
+
         // F = λf.λx. if x==0 then 1 else x*f(x-1)
 
         // CONVERGING VERSION
@@ -57,11 +56,123 @@ describe('Z fixed-point combinator', () => {
         //     return EQ(x)(ONE)(ONE)(MULT(x)(f(PRED(x))));
         // };
         const factorial = Z(F)(five);
+
+        const z = 0;
+        const ff = x => x + 1;
         expect(factorial(ff)(z)).to.equal(120);
     });
 });
 
-describe('tests to explain Z fixed-point combinator', () => {
+describe('2 - Z fixed-point combinator used for recursion using standard Javascript for recursion logic', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    it(`2.1 - Z used to calculate Factorial using standard Javascript for recursion logic
+    Here we can apply directly the logic of Factorial as it is and we are not forced ro return functions
+    in order to converge and avoid infinite loop as we had to do when using pure lambda calculus,
+    see example 1.1`, () => {
+        // const F = f => x => EQ(x)(ONE)(t => ONE)(t => MULT(t)(f(PRED(t))))(x);
+        // const F = f => x => x === 1 ? t => 1 : (t => t * f(t - 1))(x);
+        const F = f => x => {
+            if (x === 1) {
+                return 1;
+            } else {
+                return x * f(x - 1);
+            }
+        };
+
+        const factorial = Z(F)(5);
+        expect(factorial).to.equal(120);
+    });
+
+    it(`2.2 - Z used to calculate Factorial using standard Javascript for recursion logic
+    Same as test 2.1 just using fat arrow functions`, () => {
+        // const F = f => x => EQ(x)(ONE)(t => ONE)(t => MULT(t)(f(PRED(t))))(x);
+        const F = f => x => (x === 1 ? 1 : x * f(x - 1));
+
+        const factorial = Z(F)(5);
+        expect(factorial).to.equal(120);
+    });
+
+    it(`2.3 - Z used to calculate Factorial using standard Javascript for recursion logic
+    The inner logic returns a function which is then evaluated with x - this mirrors the logic that allow
+    Factorial to converge when we use a purely lambda calculus logic - see the example 1.1`, () => {
+        // const F = f => x => EQ(x)(ONE)(t => ONE)(t => MULT(t)(f(PRED(t))))(x);
+        // const F = f => x => x === 1 ? t => 1 : (t => t * f(t - 1))(x);
+        const F = f => x => {
+            if (x === 1) {
+                return (t => 1)(x);
+            } else {
+                return (t => t * f(t - 1))(x);
+            }
+        };
+
+        const factorial = Z(F)(5);
+        expect(factorial).to.equal(120);
+    });
+
+    it(`2.4 - Z used to calculate Factorial using standard Javascript for recursion logic
+    Same as test 2.3 just using fat arrow functions`, () => {
+        // const F = f => x => EQ(x)(ONE)(t => ONE)(t => MULT(t)(f(PRED(t))))(x);
+        // const F = f => x => x === 1 ? t => 1 : (t => t * f(t - 1))(x);
+        const F = f => x => (x === 1 ? (t => 1)(x) : (t => t * f(t - 1))(x));
+
+        const factorial = Z(F)(5);
+        expect(factorial).to.equal(120);
+    });
+
+    it(`2.6 - Z used to calculate Factorial using standard Javascript for recursion logic
+    Same as test 2.2 just removing the use of any variable to store intermediate function definitions`, () => {
+        // const F = f => x => (x === 1 ? 1 : x * f(x - 1));
+        // const factorial = Z(F)(5);
+
+        const factorial = (f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v))))(f => x => (x === 1 ? 1 : x * f(x - 1)))(
+            5,
+        );
+        expect(factorial).to.equal(120);
+    });
+});
+
+describe('3 - Z combinator using regular functions and not fat arrow functions', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    // http://pages.cs.wisc.edu/~horwitz/CS704-NOTES/2.LAMBDA-CALCULUS-PART2.html#rec
+
+    it('3.1 - Factorial using javascript recursive function definition', () => {
+        // const Z = f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v)));
+        const Zfunction = f => {
+            const z1 = x => {
+                const z11 = v => {
+                    return x(x)(v);
+                };
+                return f(z11);
+            };
+            const z2 = x => {
+                const z22 = v => {
+                    return x(x)(v);
+                };
+                return f(z22);
+            };
+            return z1(z2);
+        };
+
+        const F = f => x => {
+            if (x === 1) {
+                return 1;
+            } else {
+                return x * f(x - 1);
+            }
+        };
+
+        const factorial = Zfunction(F)(5);
+        expect(factorial).to.equal(120);
+    });
+});
+
+describe('4 - tests how recursion can work in standard javascript', () => {
     beforeEach(() => {});
 
     afterEach(() => {});
@@ -78,5 +189,26 @@ describe('tests to explain Z fixed-point combinator', () => {
         // };
         expect(fact(0)).to.equal(1);
         expect(fact(5)).to.equal(120);
+    });
+});
+
+describe('5 - tests Fibonacci recursion', () => {
+    beforeEach(() => {});
+
+    afterEach(() => {});
+
+    it('5.1 - Fibonacci using javascript named functions', () => {
+        const fibonacci = x => (x < 2 ? 1 : fibonacci(x - 2) + fibonacci(x - 1));
+        expect(fibonacci(0)).to.equal(1);
+        expect(fibonacci(1)).to.equal(1);
+        expect(fibonacci(7)).to.equal(21);
+    });
+
+    it('5.2 - Fibonacci using Z combinator', () => {
+        const F = f => x => (x < 2 ? 1 : f(x - 2) + f(x - 1));
+        const fibonacci = Z(F);
+        expect(fibonacci(0)).to.equal(1);
+        expect(fibonacci(1)).to.equal(1);
+        expect(fibonacci(7)).to.equal(21);
     });
 });
